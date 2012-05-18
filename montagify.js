@@ -13,6 +13,8 @@ function Montage(container, margin) {
 		//Check if size has been changed otherwise rebuild isn't necessary
 		if(this.width != this.container.clientWidth || this.height != this.container.clientHeight){
 			this.createMontage();
+			this.width = this.container.clientWidth;
+	        this.height = this.container.clientHeight;
 		}
 	}
 	
@@ -58,7 +60,7 @@ function Montage(container, margin) {
 
 			imageContainers[i].appendChild(this.images[i]);
 		}
-		isCreated = true;
+		this.isCreated = true;
 	}
 	
 	this.divide = function(parentContainer, numImagesLeft, margin) {
@@ -102,6 +104,7 @@ function Montage(container, margin) {
 
 		//Do vertical cut
 		if (verticalOrHorizontalCut < (0.5 * aspect)) {
+			console.log();
 			var cutRatio = 0.4 + Math.random() * (0.2);
 
 			var width1 = Math.floor(parentWidth * cutRatio);
