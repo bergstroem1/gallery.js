@@ -18,7 +18,10 @@ function Montage(container, margin) {
 		}
 	}
 	
-	this.createMontage = function(){
+	this.createMontage = function(caption, showCaptionOnHover){
+		caption = caption || false;
+		showCaptionOnHover = showCaptionOnHover || false;
+		
 		if(this.isCreated == false) {
 			//Collect all a tags
 			for (var i = 0; i < this.container.childNodes.length; i++) {
@@ -59,15 +62,49 @@ function Montage(container, margin) {
 			this.scaleImageToFit(imageContainers[i], this.images[i].childNodes[0]);
 
 			imageContainers[i].appendChild(this.images[i]);
+			
+			if(caption == true)
+				this.createCaption(imageContainers[i], this.images[i], showCaptionOnHover);
 		}
 		this.isCreated = true;
+	}
+	
+	this.createCaption = function(imageContainer, image, showCaptionOnHover) {
+	
+		var captionBox = document.createElement('div');
+		captionBox.style.backgroundColor = "rgba(0,0,0,0.5)";
+		captionBox.style.position = "absolute";
+		captionBox.style.width = imageContainer.clientWidth - 10 + "px";
+		captionBox.style.padding = "5px";
+		captionBox.style.color = "silver";
+		var caption = document.createTextNode(image.childNodes[0].getAttribute('alt'));
+		captionBox.appendChild(caption);
+		imageContainer.appendChild(captionBox);
+		
+		if(showCaptionOnHover){
+			captionBox.style.bottom = -captionBox.clientHeight + "px";
+			captionBox.style['-webkit-transition'] = "bottom 0.25s ease-in";
+			captionBox.style['-moz-transition'] = "bottom 0.25s ease-in";
+			captionBox.style['-o-transition'] = "bottom 0.25s ease-in";
+			captionBox.style['transition'] = "bottom 0.25s ease-in";
+			
+			imageContainer.onmouseover = function(e) {
+				captionBox.style.bottom = "0px";
+			}
+			imageContainer.onmouseout = function(e){
+				captionBox.style.bottom = -captionBox.clientHeight + "px";
+			}
+		}
+		else captionBox.style.bottom = "0px";
 	}
 	
 	this.divide = function(parentContainer, numImagesLeft, margin) {
 		if (numImagesLeft > 1) {
 			var container1 = document.createElement('div');
+			container1.style.position = "relative";
 			container1.style.float = "left";
 			var container2 = document.createElement('div');
+			container2.style.position = "relative";
 			container2.style.float = "left";
 			
 			this.cut(parentContainer, container1, container2, margin);
@@ -80,16 +117,12 @@ function Montage(container, margin) {
 		}
 		else if (numImagesLeft == 1) {
 			var container = document.createElement('div');
-
+			container.style.position = "relative";
 			container.style.width = parentContainer.clientWidth - margin * 2 + "px";
 			container.style.height = parentContainer.clientHeight - margin * 2 + "px";
 			container.style.margin = margin + "px";
 			container.style.overflow = "hidden";
 			container.className = "montagify-image-container";
-			/*container.style["background-color"] = "rgba(" + Math.round(Math.random() * 255) + ","
-			+ Math.round(Math.random() * 255) + ","
-			+ Math.round(Math.random() * 255) + ","
-			+ 1 + ")";*/
 			parentContainer.appendChild(container);
 		}
 	}

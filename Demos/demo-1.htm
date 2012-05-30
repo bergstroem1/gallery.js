@@ -8,7 +8,7 @@
 		var montage;
         window.onload = function () {
             montage = new Montage(document.getElementById('montage'), 2);
-			montage.createMontage();
+			montage.createMontage(true, true);
         }
 		
 		window.onresize = function() {
@@ -21,6 +21,7 @@
 			height: 100%;
 			margin: 0px;
 			padding: 0px;
+			font-size: 10pt;
 		}
 		
 		#container{
@@ -40,18 +41,18 @@
 	<div id="container">
 		<h1>Montage with absolute size</h1>
 		<div id="montage">
-			<a><img src="images/1.jpg" /></a>
-			<a><img src="images/2.jpg" /></a>
-			<a><img src="images/3.jpg" /></a>
-			<a><img src="images/4.jpg" /></a>
-			<a><img src="images/5.jpg" /></a>
-			<a><img src="images/6.jpg" /></a>
-			<a><img src="images/7.jpg" /></a>
-			<a><img src="images/8.jpg" /></a>
-			<a><img src="images/9.jpg" /></a>
-			<a><img src="images/10.jpg" /></a>
-			<a><img src="images/11.jpg" /></a>
-			<a><img src="images/12.jpg" /></a>
+			<a><img src="images/1.jpg" alt="Bild 1"/></a>
+			<a><img src="images/2.jpg" alt="Bild 2"/></a>
+			<a><img src="images/3.jpg" alt="Bild 3"/></a>
+			<a><img src="images/4.jpg" alt="Bild 4"/></a>
+			<a><img src="images/5.jpg" alt="Bild 5"/></a>
+			<a><img src="images/6.jpg" alt="Bild 6"/></a>
+			<a><img src="images/7.jpg" alt="Bild 7"/></a>
+			<a><img src="images/8.jpg" alt="Bild 8"/></a>
+			<a><img src="images/9.jpg" alt="Bild 9"/></a>
+			<a><img src="images/10.jpg" alt="Bild 10"/></a>
+			<a><img src="images/11.jpg" alt="Bild 11"/></a>
+			<a><img src="images/12.jpg" alt="Bild 12"/></a>
 		</div>
 	</div>
 </body>
