@@ -8,7 +8,7 @@
 		var montage;
         window.onload = function () {
             montage = new Montage(document.getElementById('montage'));
-			montage.createMontage({caption: true, showCaptionOnHover: true});
+			montage.createMontage({margin: 10, numColumns: 3, minColumnWidth: 300, montageType: "columnMontage", caption: true});
         }
 		
 		window.onresize = function() {
@@ -21,25 +21,37 @@
 			height: 100%;
 			margin: 0px;
 			padding: 0px;
-			font-size: 10pt;
+			font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
 		}
 		
 		#container{
 			margin: 0 auto;
-			width: 700px;
+			width: 100%;
 		}
 		
 		#montage {
-			width: 700px; 
-			height: 450px; 
-			background-color: black; 
-			border: 2px solid black;
+			width: 100%;
+		}
+		
+		.montage-column {
+			/*background-color: #eeeeee;*/
+		}
+		
+		.montage-image-main-container {
+			background-color: #dedede;
+			margin-bottom: 30px;
+			padding: 10px;
+		}
+		.montage-image-container {
+			
+		}
+		.montage-image-description-container {
 		}
 	</style>
 </head>
 <body>
 	<div id="container">
-		<h1>Montage with absolute size</h1>
+		<h1>Montage with columns</h1>
 		<div id="montage">
 			<a><img src="images/1.jpg" alt="Bild 1"/></a>
 			<a><img src="images/2.jpg" alt="Bild 2"/></a>
