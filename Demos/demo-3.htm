@@ -8,7 +8,7 @@
 		var montage;
         window.onload = function () {
             montage = new Montage(document.getElementById('montage'));
-			montage.createMontage({margin: 10, numColumns: 3, minColumnWidth: 300, montageType: "columnMontage", caption: true});
+			montage.createMontage({margin: 10, numColumns: 3, columnWidth: 200, montageType: "columnMontage", caption: true});
         }
 		
 		window.onresize = function() {

@@ -8,7 +8,7 @@ function Montage(container) {
 	this.caption = false;
 	this.showCaptionOnHover = false;
 	this.numColumns = 4;
-	this.minColumnWidth;
+	this.columnWidth;
 	this.margin = 2;
 	
 	this.images = [];
@@ -24,7 +24,7 @@ function Montage(container) {
 				caption: this.caption, 
 				showCaptionOnHover: this.showCaptionOnHover,
 				numColumns: this.numColumns,
-				minColumnWidth: this.minColumnWidth,
+				columnWidth: this.columnWidth,
 				margin: this.margin
 			});
 			this.prevWidth = this.container.clientWidth;
@@ -39,7 +39,7 @@ function Montage(container) {
 			this.caption = settings.caption || this.caption;
 			this.showCaptionOnHover = settings.showCaptionOnHover || this.showCaptionOnHover;
 			this.numColumns = settings.numColumns || this.numColumns;
-			this.minColumnWidth = settings.minColumnWidth || undefined;
+			this.columnWidth = settings.columnWidth || undefined;
 			this.margin = settings.margin || this.margin;
 		}
 		
@@ -75,20 +75,35 @@ function Montage(container) {
 	}
 	
 	this.createColumnMontage = function(){
-		//Calculate numColumns if minColumnWidth is set
-		if(this.minColumnWidth != undefined) {
-			var totalWidth = this.container.clientWidth;
-			this.numColumns = Math.floor(totalWidth / this.minColumnWidth);
+		var totalWidth = this.container.clientWidth;
+		var colWidth;
+		//Calculate numColumns if columnWidth is set
+		if(this.columnWidth != undefined) {
+			this.numColumns = Math.floor(totalWidth / (this.columnWidth + this.margin*2));
+			colWidth = this.columnWidth;
 		}
+		else 
+			colWidth = this.container.clientWidth / this.numColumns;
 		
 		//Create the columns
 		var cols = [];
-		var colWidth = this.container.clientWidth / this.numColumns;
 		
 		for(var i = 0; i < this.numColumns; i++) {
 			var col = document.createElement('div');
-			col.style.width = colWidth - this.margin * 2 + "px";
-			col.style.margin = this.margin + "px";
+			
+			if(this.columnWidth != undefined) {
+				var margin = Math.floor((totalWidth - (colWidth * this.numColumns))/(this.numColumns*2));
+				
+				col.style.width = colWidth + "px";
+				
+				col.style.marginLeft = margin + "px";
+				col.style.marginRight = margin + "px";
+			}
+			else {
+				col.style.width = colWidth - this.margin * 2 + "px";
+				col.style.marginLeft = this.margin + "px";
+				col.style.marginRight = this.margin + "px";
+			}
 			col.style.display = "inline-block";
 			col.style.verticalAlign = "top";
 			col.className = "montage-column";
