@@ -10,7 +10,9 @@ This line creates a gallery from the element with id 'gallery'
 
 The script expects the following structure to be found inside the element. The `a` tag can be skipped if you don't want the images to be links.
 
-`<div id="gallery">
+`
+
+<div id="gallery">
 
         <a><img src="images/1.jpg" alt="Bild 1"/></a>
 
@@ -36,4 +38,6 @@ The script expects the following structure to be found inside the element. The `
 
         <a><img src="images/12.jpg" alt="Bild 12"/></a>
 
-</div>`
+</div>
+
+`
