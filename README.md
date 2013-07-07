@@ -28,3 +28,21 @@ The script expects the following structure to be found inside the element. The `
         <a><img src="images/12.jpg" alt="Bild 12"/></a>
 </div>
 ```
+
+It is possible to specify options for the gallery through a second parameter. The following code sets the margin for the images to 2%:
+
+```javascript
+gallery.createGallery(document.getElementById('gallery'), {margin: "2%"});
+```
+
+The alt text can be used to show a caption for each image. This is also done through the options parameter: 
+
+```javascript
+gallery.createGallery(document.getElementById('gallery'), {margin: "2%", caption: true});
+```
+
+If you set `showCaptionOnHover` to `true` the captions will only show when you hover the image:
+
+```javascript
+gallery.createGallery(document.getElementById('gallery'), {margin: "2%",  caption: true, showCaptionOnHover: true});
+```
