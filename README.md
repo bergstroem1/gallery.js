@@ -1,6 +1,6 @@
 #Gallery.js
 
-Gallery.js generates collage-like galleries. Not fully working (yet)...
+Gallery.js generates collage-like galleries.
 
 #Getting started
 Load the script file in your html file.
@@ -10,7 +10,7 @@ This line creates a gallery from the element with id 'gallery'
 gallery.createGallery(document.getElementById('gallery'));
 ```
 
-The script expects the following structure to be found inside the element. The `a` tag can be skipped if you don't want the images to be links.
+The script expects the following structure to be found inside the element. The `a` tag can be skipped if you don't want the images to be links. You can even mix, with some items having an `a` tag and some not having it.
 
 ```html
 <div id="gallery">

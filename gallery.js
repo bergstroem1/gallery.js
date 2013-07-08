@@ -98,7 +98,12 @@ var gallery =  (function() {
 		captionBox.className = "gallery-caption";
 		var caption = document.createTextNode(text);
 		captionBox.appendChild(caption);
-		imageContainer.appendChild(captionBox);
+
+		// If image container has a child, for example a link tag, add caption behind it.
+		if(imageContainer.firstChild)
+			imageContainer.insertBefore(captionBox, imageContainer.firstChild);
+		else
+			imageContainer.appendChild(captionBox);
 		
 		if(showCaptionOnHover){
 			captionBox.style.bottom = -captionBox.clientHeight + "px";
@@ -136,8 +141,19 @@ var gallery =  (function() {
 		//Put the images into the 'image-container'-elements
 		for (var i = 0; i < imageContainers.length; i++) {
 
+			if(galleryItems[i].linkUrl) {
+				var linkElement = document.createElement('a');
+				linkElement.href = galleryItems[i].linkUrl;
+				linkElement.style.position = "absolute";
+				linkElement.style.left = 0;
+				linkElement.style.right = 0;
+				linkElement.style.top = 0;
+				linkElement.style.bottom = 0;
+
+				imageContainers[i].appendChild(linkElement);
+			}
+
 			imageContainers[i].style.backgroundImage = "url(" + galleryItems[i].imgSrc + ")";
-			
 			
 			if(_options.caption == true)
 				createCaption(imageContainers[i], galleryItems[i].imgAlt, _options.showCaptionOnHover);
@@ -162,16 +178,21 @@ var gallery =  (function() {
 			if (_gallery.target.childNodes[i].tagName != undefined) {
 				var item = {};
 
-				// Find a href
-				if(	_gallery.target.childNodes[i].tagName.toLowerCase() == 'a' && 
+				// Find a href, if we have link tags
+				if(_gallery.target.childNodes[i].tagName.toLowerCase() == 'a' && 
 						_gallery.target.childNodes[i].href != undefined &&
 						_gallery.target.childNodes[i].href != "") {
 						
 					item.linkUrl = _gallery.target.childNodes[i].href;
 				}
 
-				// Find first image in each and save url and alt text
-				var img = findNodeWithTagName(_gallery.target.childNodes[i], "img");
+				//Find img tag and save src and alt-text
+				var img;
+				if(_gallery.target.childNodes[i].tagName.toLowerCase() == "img")
+					var img = _gallery.target.childNodes[i];
+				else 
+					img = findNodeWithTagName(_gallery.target.childNodes[i], "img");
+				
 				item.imgSrc = img.src;
 				item.imgAlt = img.alt;
 
@@ -179,6 +200,7 @@ var gallery =  (function() {
 			}
 		}
 
+		console.log(_gallery.galleryItems);
 		// Empty the container
 		while (_gallery.target.firstChild) {
 			_gallery.target.removeChild(_gallery.target.firstChild);
