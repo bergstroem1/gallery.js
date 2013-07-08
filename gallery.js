@@ -8,15 +8,13 @@ var gallery =  (function() {
 
 	// Makes a horizontal or vertical cut depending on the aspect ratio of the parent container.
 	function cut(parentContainer, container1, container2) {
-		var verticalOrHorizontalCut = Math.random();
-
 		var parentWidth = parentContainer.clientWidth;
 		var parentHeight = parentContainer.clientHeight;
 
 		var aspect = (parentWidth / parentHeight);
 
 		//Do vertical cut
-		if (verticalOrHorizontalCut < (0.8 * aspect)) {
+		if (aspect > 1) {
 			var cutRatio = 0.4 + Math.random() * (0.2);
 
 			container1.style.width = Math.floor(100 * cutRatio) + "%";
@@ -44,11 +42,11 @@ var gallery =  (function() {
 
 			var container1 = document.createElement('div');
 			container1.style.position = "relative";
-			container1.style.float = "left";
+			container1.style.cssFloat = "left";
 
 			var container2 = document.createElement('div');
 			container2.style.position = "relative";
-			container2.style.float = "left";
+			container2.style.cssFloat = "left";
 			
 			cut(parentContainer, container1, container2, margin);
 
@@ -179,10 +177,6 @@ var gallery =  (function() {
 
 				_gallery.galleryItems.push(item);
 			}
-		}
-
-		for(var i in _gallery.galleryItems) {
-			//console.log(_gallery.galleryItems[i]);
 		}
 
 		// Empty the container
