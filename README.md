@@ -46,3 +46,14 @@ If you set `showCaptionOnHover` to `true` the captions will only show when you h
 ```javascript
 gallery.createGallery(document.getElementById('gallery'), {margin: "2%",  caption: true, showCaptionOnHover: true});
 ```
+
+#Styling
+Styling the gallery can easily be done with css. Gallery.js assigns the classname `gallery-image-container` to every image container. The following example shows how to add rounded corners to the images in the gallery.
+
+```css
+.gallery-image-container {
+        border-radius: 10px;
+}
+```
+
+The captions can also be styled through the `.gallery-caption` selector.
